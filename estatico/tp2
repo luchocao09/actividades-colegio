@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <title>mi form</title>
+        
+    </head>
+    <body>
+        <div>
+        <fieldset >
+            <legend>empleado</legend>
+        <form method="post">
+        <label >Nombre</label>
+        <br>
+        <input type="text" name="nombre">
+        <br>
+        <label>Cargo</label>
+        <br>
+        <input type="text" name="cargo">
+        <br>
+        <input type="submit" value="calcular sueldo">
+    </form> 
+    </fieldset>
+    </div>
+</body>
+</html>
+
+
+<?php
+
+include 'Calculadora-estilo.html';
+
+$nombre=isset($_POST['nombre']) ? $_POST['nombre'] : '';
+echo '<br>';
+
+$cargo=isset($_POST['cargo']) ? $_POST['cargo'] : '';
+if($cargo=='cadete' or $cargo=='Cadete' or $cargo=='CADETE'){
+    echo "Ustede $nombre gana 20000";
+}
+
+echo "<p>El método GET envía los datos visibles en la URL para realizar búsquedas, mientras que POST los oculta en el cuerpo del mensaje para mayor seguridad en registros o inicios de sesión; paralelamente, include y require sirven para insertar archivos externos, con la diferencia de que include permite que el código siga funcionando si el archivo no aparece (solo lanza un aviso), mientras que require detiene todo el proceso con un error fatal si falta esa pieza clave.</p>";
+
+?>
+
+
+
+
+fieldset{
+    border:7px solid #b5b1ad; 
+    
+}
+
+div{
+    background: #4ba;
+    width: 25%;
+}
+
+p{width:50%;}
