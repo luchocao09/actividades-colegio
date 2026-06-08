@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  
+  <h1>PrePrueba 2</h1>
+  <label for="botn">
+    <input type="submit" value="boton" id="boton">
+  </label>
+  <br>
+  <br>
+  <h2>Clientes vip</h2>
+  <table>
+    <tbody id="cli_vip"></tbody>
+  </table>
+
+  <h2>Clientes sin cargo extra</h2>
+  <table>
+    <tbody id="cli_sin_extra"></tbody>
+  </table>
+
+</body>
+<script src="script.js"></script>
+</html>
+// MOSTRAR EL LISTADO DE CLIENTES VIP
+// MOSTRAR EL LISTADO DE LOS CLIENTES QUE NO TENGAN CARGO EXTRA
+//ASIGNAR CARGO EXTRA EN TRUE A LOS CLIENTES QUE TENGAN MEMBRESIA BLACK
+//SE PUEDE HACER CON UN ARRAY O CON UN JSON
+
+let botn = document.getElementById("boton");
+botn.addEventListener("click" , procesarClientes)
+
+async function procesarClientes(){
+
+  try{
+  
+  const rta = await fetch("data.json")
+  const clientes = await rta.json()
+  
+  
+  const conblacky = clientes.map(e => {
+    if (e.membresia=="Black")
+      {
+        let jonson=true;
+        return{
+                ...e,
+                cargoExtra:jonson 
+              };
+  }
+  else
+    return {...e};
+     
+  
+
+  })
+  // mostrar nocargo
+  const vipi = conblacky.map(e => {
+    `<tr>
+    <td>${e.id}</td>
+    <td>${e.nombre}</td>
+    <td>${e.membresia}</td>
+      <td>${e.cargoExtra}</td>
+
+    </tr>`
+    const tablaBody = document.getElementById("cli_vip")
+  
+  const filas = conblacky.map(e =>`
+    
+    <tr>
+    <td>${e.id}</td>
+    <td>${e.nombre}</td>
+    <td>${e.membresia}</td>
+      <td>${e.cargoExtra}</td>
+
+    </tr>
+    
+    `)
+
+  
+  tablaBody.innerHTML = filas.join("")
+    }
+
+  )
+  
+  
+  
+  
+  
+  const tBody2 = document.getElementById("cli_sin_extra")
+  
+  const tabla2 = conblacky.map(e =>`
+  
+  <tr>
+  <td>${e.id}</td>
+  <td>${e.nombre}</td>
+  <td>${e.membresia}</td>
+  <td>${e.cargoExtra}</td>
+  </tr>
+  
+  `)
+  
+  tBody2.innerHTML = tabla2.join("")
+  
+  }
+  catch(error){
+  console.log("error "+error)
+  }
+  
+  }
+[
+    { "id": 1, "nombre": "Cristina Arancibia", "membresia": "Gold", "cargoExtra": false },
+    { "id": 2, "nombre": "Iván González", "membresia": "Platinum", "cargoExtra": false },
+    { "id": 3, "nombre": "Martín Pérez", "membresia": "Gold", "cargoExtra": true },
+    { "id": 4, "nombre": "Lucía Fernández", "membresia": "Black", "cargoExtra": false },
+    { "id": 5, "nombre": "Sofía Rodríguez", "membresia": "Platinum", "cargoExtra": true },
+    { "id": 6, "nombre": "Juan López", "membresia": "Gold", "cargoExtra": false },
+    { "id": 7, "nombre": "Carla Méndez", "membresia": "Black", "cargoExtra": true },
+    { "id": 8, "nombre": "Diego Sánchez", "membresia": "Platinum", "cargoExtra": false },
+    { "id": 9, "nombre": "Valentina Gómez", "membresia": "Gold", "cargoExtra": true },
+    { "id": 10, "nombre": "Fernando Castro", "membresia": "Black", "cargoExtra": false }
+  ]
