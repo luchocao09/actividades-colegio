@@ -1,0 +1,126 @@
+
+var paq_del = document.getElementById("paq_del");
+var img_rot = document.getElementById("img_rot");
+var calcular = document.getElementById("calcular");
+
+paq_del.addEventListener("change", function() {
+    if (paq_del.checked) {
+        img_rot.src = "paquete_roto.jpg";
+        img_rot.style.display = "block";
+    
+    } else {
+        img_rot.style.display = "none";
+    
+    }
+
+});
+
+paq_del.addEventListener("focus", function() {
+	calcular.style.backgroundColor = "red";
+});
+
+paq_del.addEventListener("blur", function() {
+	calcular.style.backgroundColor = "blue";
+});
+
+
+
+
+
+var peso = document.getElementById("peso");
+var _24hs = document.getElementById("_24hs");
+
+peso.addEventListener("input", function() {
+    let valor = parseFloat(peso.value);
+
+    if (valor <= 0) {
+        alert("El peso debe ser mayor a 0");
+    } else if (valor >= 3) {
+        _24hs.style.display = "block";
+    } else {
+        _24hs.style.display = "none";
+    }
+});
+
+
+
+function calc_aranceles() {
+    precio_base = 2000;
+    var envio = document.getElementById("envio").value;
+    var peso = parseFloat(document.getElementById("peso").value);
+    var paq_del = document.getElementById("paq_del").checked;
+    var _24hs = document.getElementById("24hs").checked;
+    var total = precio_base * peso;
+
+    if (envio == "express") {
+        total = total * 1.5;
+    }
+    if (paq_del) {
+        total = total * 1.2;
+    }
+    if (_24hs) {
+        total += total * 0.25;
+    }
+
+    var seguro = 0;
+	if (paq_del) {
+		seguro = 500;
+	}
+
+
+
+alert(
+    "Valor del envio: $" + (precio_base * peso) + "\n" + "Valor del seguro: $" + seguro + "\n" + "valor del paquete delicado: $" + (paq_del ? (precio_base * peso * 0.2) : 0) + "\n" + "Valor del envio express: $" + (envio == "express" ? (precio_base * peso * 0.5) : 0) + "\n" + "Total: $" + total
+);
+	document.getElementById("resultado").innerText = "Total del envio: $" + total; 
+}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tp 3</title>
+</head>
+<body style="background: #292828; color: white;">
+    <div>
+        <center>
+        <label for="envio">Tipo de envío:</label>
+        <br>
+        <select name="envio" id="envio">
+            <option value="estandar">Estándar</option>
+            <option value="express">Express</option>
+        </select>
+        <br>
+        <br>
+        <label for="peso">Peso del paquete (kg):</label>
+        <br>
+        <input type="text" name="peso" id="peso">
+        <br>
+        <div id="_24hs" style="display: none;">
+            <label for="24hs">¿Envio de 24 hs?</label>
+            <input type="checkbox" name="24hs" id="24hs">
+        </div>
+        <br>
+        <br>
+        <label for="paq_del">¿Es un paquete delicado?</label>
+        <input type="checkbox" name="paq_del" id="paq_del">
+        <br>
+        <br>
+        <br>
+        <img id="img_rot" style="width: 150px;">
+        <br>
+        <button id="calcular" onclick="calc_aranceles()">Calcular aranceles</button>
+        <br>
+        <br>
+        <p id="resultado"></p>
+        </center>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
