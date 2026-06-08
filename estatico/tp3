@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Viajes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="contenedor">
+    <form action="accion_viaje.php" method="POST">
+        <label>Nombre del cliente</label>
+        <input type="text" name="cliente"><br>
+
+        <label>Origen</label>
+        <input type="text" name="origen"><br>
+
+        <label>Destino</label>
+        <input type="text" name="destino"><br>
+
+        <label>Tipo de viaje</label>
+        <select name="tipo">
+            <option value="light">Light</option>
+            <option value="plus">Plus</option>
+            <option value="premier">Premier</option>
+        </select>
+
+        <h3>Elija la cantidad de Kg de equipaje</h3>
+
+        <button type="submit" name="equipaje" value="50">50 kg de equipaje extra</button>
+        <button type="submit" name="equipaje" value="20">20 kg de equipaje extra</button>
+        <button type="submit" name="equipaje" value="0">Sin exceso de equipaje</button>
+    </form>
+</div>
+
+</body>
+</html>
+
+
+<?php
+
+$cliente = $_POST['cliente'];
+$origen = $_POST['origen'];
+$destino = $_POST['destino'];
+$tipo = $_POST['tipo'];
+$equipaje = $_POST['equipaje'];
+
+if($origen == $destino){
+    $precio = 20000;
+} else {
+    $precio = 40000;
+}
+
+if($tipo == "plus"){
+    $precio = $precio + ($precio * 0.10);
+}
+
+if($tipo == "premier"){
+    $precio = $precio + ($precio * 0.20);
+}
+
+$color = "black";
+
+if($equipaje == 50){
+    $precio = $precio + 5000;
+    $color = "blue";
+}
+
+if($equipaje == 20){
+    $precio = $precio + 2000;
+    $color = "fuchsia";
+}
+
+if($equipaje == 0){
+    $color = "green";
+}
+
+echo "<h1 style='color:$color'>Valor del viaje: $precio</h1>";
+
+?>
+
+
+
