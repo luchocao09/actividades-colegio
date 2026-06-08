@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>mi form</title>
+        
+    </head>
+    <body><form method="post">
+        <label >Numero 1</label>
+        <input type="text" name="n1">
+        <label>Numero 2</label>
+        <input type="text" name="n2">
+        <input type="submit" value="calcular">
+    </form> 
+</body>
+</html>
+
+
+
+<?php
+
+include 'form.html';
+
+$num1=$_POST['n1'];
+$num2=$_POST['n2'];
+
+$suma= $num1 + $num2;
+echo 'la sumosa: '.$suma;
+echo '<br>';
+
+$resta= $num1 - $num2;
+echo 'la golosa resta: '.$resta;
+echo '<br>';
+
+$multiplicacion= $num1 * $num2;
+echo 'la multi plosa: '.$multiplicacion;
+echo '<br>';
+
+$divisora= $num1 / $num2;
+echo 'la divisora : '.$divisora;
