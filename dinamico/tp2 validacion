@@ -1,0 +1,62 @@
+
+function calcularsueldo() {
+
+var nombre = document.getElementById("nombre").value;
+var edad = document.getElementById("edad").value;
+var cargo = document.getElementById("cargo").value;
+errores = "";
+total = 0;
+
+if (edad < 18 || edad > 80) {
+    errores += "La edad debe ser mayor a 18 años y menor a 80 años. \n";
+}
+
+if (!isNaN(nombre)) {
+    errores += "El nombre no debe contener numeros. \n";
+}
+
+if (cargo == "operario") {
+    total = 500000;
+} else if (cargo == "cadete") { 
+    total = 1000000;
+} else {
+    total = 1200000;
+}
+
+if (errores != "") {
+    alert(errores);
+
+} else {
+    alert("el sueldo total es: "+ total);
+}
+
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validaciones</title>
+</head>
+<body>
+    <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br>
+        <label for="edad">Edad:</label>
+        <input type="text" id="edad" name="edad" required>
+        <br>
+        <label for="cargo">Cargo:</label>
+        <select name="cargo" id="cargo" required>
+            <option value="operario">Operario</option>
+            <option value="cadete">Cadete</option>
+            <option value="ejecutivo">Ejecutivo</option>
+        </select>
+        <br>
+        <input type="submit" value="Calcular" onclick="calcularsueldo()">
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
