@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simulador de Alojamiento</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+        <div class="caja">
+            <h1>Simulador de Alojamiento</h1>
+            <form action="accion.php" method="post">
+                <label>Tipo de alojamiento:</label>
+                <br>
+                <select name="tipoAlo">
+                    <option value="hotel">Hotel</option>
+                    <option value="posada">Posada</option>
+                    <option value="hostel">Hostel</option>
+                </select>
+                <br>
+                <br>
+                <label>Cantidad de dias:</label>
+                <br>
+                <input type="text" name="dias">
+                <br>
+                <br>
+                <label>
+                    <input type="checkbox" name="desayuno">
+                    Desayuno (+3000)
+                </label>
+                <br>
+                <br>
+                <input type="submit" value="Calcular">
+            </form>
+        </div>
+</body>
+</html>
+
+<?php
+
+if(isset($_POST["tipoAlo"]) && isset($_POST["dias"])){
+
+    $tipo = $_POST["tipoAlo"];
+    $dias = $_POST["dias"];
+
+    if(!is_numeric($dias)){
+        echo "Ingrese un numero valido de dias";
+    }
+
+    $dias = intval($dias);
+
+    if($dias <= 0){
+        echo "Los dias deben ser mayores a 0";
+    }
+
+    if($tipo == "hotel"){
+        $precio_dia = 1200;
+    }
+    elseif($tipo == "posada"){
+        $precio_dia = 900;
+    }
+    elseif($tipo == "hostel"){
+        $precio_dia = 800;
+    }
+
+    $total = $precio_dia * $dias;
+
+    if($dias > 7){
+        $total = $total * 0.95;
+    }
+
+    if(isset($_POST["desayuno"])){
+        $total = $total + 3000;
+    }
+    echo "<h2>Total a pagar: " . $total . "</h2>";
+
+}
+else{
+    echo "Faltan datos";
+}
+
+?>
