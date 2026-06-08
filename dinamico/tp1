@@ -1,1 +1,51 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+</head>
+<body>
+    <input type="text" id="n1">
+    <input type="text" id="n2">
+    <input type="text" id="op" placeholder="Operación (1:+, 2:-, 3:/, 4:*)">
+    <input type="submit" id="suma" value="+" onclick="setOp('1')">
+    <input type="submit" id="resta" value="-" onclick="setOp('2')">
+    <input type="submit" id="division" value="/" onclick="setOp('3')">
+    <input type="submit" id="multiplicacion" value="*" onclick="setOp('4')">
+    <input type="submit" value="Calcular" onclick="calculadora()">
+    <script src="calcu.js"></script>
+    <p id="rta"></p>
+</body>
+</html>
+
+
+//js
+function setOp(op) {
+    document.getElementById('op').value = op;
+    calculadora();
+}
+
+function calculadora(){
+    var n1=Number.parseInt(document.getElementById("n1").value)
+    var n2=Number.parseInt(document.getElementById("n2").value)
+    var rta=document.getElementById("rta")
+    var op = document.getElementById("op").value
+
+    if (op == '1')
+    {
+        rta.innerText="Suma: " + (n1 + n2)
+    } else if (op == '2')
+        {
+        rta.innerText="Resta: " + (n1 - n2)
+    } else if (op == '3')
+        {
+        rta.innerText="Division: " + (n1 / n2)
+    } else if (op == '4')
+        {
+        rta.innerText="Multiplicacion: " + (n1 * n2)
+    } else {
+        rta.innerText="Operación no válida"
+    }
+}
