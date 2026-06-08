@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Empleados</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    table { border-collapse: collapse; margin-bottom: 30px; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f4f4f4; }
+    h2 { margin-top: 40px; }
+  </style>
+</head>
+<body>
+
+  <h1>Gestión de Empleados</h1>
+
+  <h2>Desarrolladores</h2>
+  <div id="tablaDesarrolladores"></div>
+
+  <h2>Femeninos con hijos</h2>
+  <div id="tablaMujeres"></div>
+
+  <h2>Masculinos sin hijos</h2>
+  <div id="tablaHombres"></div>
+
+  <script>
+    const empleados = [
+      { id: 1, nombre: "Lucas", apellido: "García", cargo: "Desarrollador Frontend", tieneHijos: false, sueldo: 0, edad: 28, genero: "Masculino" },
+      { id: 2, nombre: "Marta", apellido: "Rodríguez", cargo: "Diseñadora UX/UI", tieneHijos: true, sueldo: 0, edad: 35, genero: "Femenino" },
+      { id: 3, nombre: "Julián", apellido: "Sánchez", cargo: "Analista de Datos", tieneHijos: false, sueldo: 0, edad: 24, genero: "Masculino" },
+      { id: 4, nombre: "Sofía", apellido: "Martínez", cargo: "Project Manager", tieneHijos: true, sueldo: 0, edad: 42, genero: "Femenino" },
+      { id: 5, nombre: "Diego", apellido: "López", cargo: "Desarrollador Backend", tieneHijos: false, sueldo: 0, edad: 31, genero: "Masculino" },
+      { id: 6, nombre: "Lucía", apellido: "Gómez", cargo: "QA Tester", tieneHijos: true, sueldo: 0, edad: 29, genero: "Femenino" },
+      { id: 7, nombre: "Nicolás", apellido: "Pérez", cargo: "DevOps Engineer", tieneHijos: false, sueldo: 0, edad: 33, genero: "Masculino" },
+      { id: 8, nombre: "Elena", apellido: "Fernández", cargo: "Administradora de Base de Datos", tieneHijos: true, sueldo: 0, edad: 45, genero: "Femenino" },
+      { id: 9, nombre: "Tomás", apellido: "Díaz", cargo: "Desarrollador Mobile", tieneHijos: false, sueldo: 0, edad: 26, genero: "Masculino" },
+      { id: 10, nombre: "Valeria", apellido: "Álvarez", cargo: "Scrum Master", tieneHijos: true, sueldo: 0, edad: 38, genero: "Femenino" },
+      { id: 11, nombre: "Mateo", apellido: "Romero", cargo: "Desarrollador Frontend", tieneHijos: false, sueldo: 0, edad: 22, genero: "Masculino" },
+      { id: 12, nombre: "Camila", apellido: "Sosa", cargo: "Diseñadora UX/UI", tieneHijos: false, sueldo: 0, edad: 27, genero: "Femenino" },
+      { id: 13, nombre: "Joaquín", apellido: "Torres", cargo: "Analista de Datos", tieneHijos: true, sueldo: 0, edad: 40, genero: "Masculino" },
+      { id: 14, nombre: "Victoria", apellido: "Ruiz", cargo: "Project Manager", tieneHijos: false, sueldo: 0, edad: 34, genero: "Femenino" },
+      { id: 15, nombre: "Agustín", apellido: "Benítez", cargo: "Desarrollador Backend", tieneHijos: true, sueldo: 0, edad: 30, genero: "Masculino" },
+      { id: 16, nombre: "Delfina", apellido: "Acosta", cargo: "QA Tester", tieneHijos: false, sueldo: 0, edad: 25, genero: "Femenino" },
+      { id: 17, nombre: "Bruno", apellido: "Flores", cargo: "DevOps Engineer", tieneHijos: true, sueldo: 0, edad: 37, genero: "Masculino" },
+      { id: 18, nombre: "Martina", apellido: "Medina", cargo: "Soporte Técnico", tieneHijos: false, sueldo: 0, edad: 23, genero: "Femenino" },
+      { id: 19, nombre: "Facundo", apellido: "Suárez", cargo: "Desarrollador Fullstack", tieneHijos: true, sueldo: 0, edad: 32, genero: "Masculino" },
+      { id: 20, nombre: "Paula", apellido: "Herrera", cargo: "Especialista en Seguridad", tieneHijos: false, sueldo: 0, edad: 36, genero: "Femenino" }
+    ];
+
+    // asignar sueldos
+    const empleadosConSueldo = empleados.map(emp => {
+      const esDev = emp.cargo.toLowerCase().includes("desarrollador");
+      return { ...emp, sueldo: esDev ? 2000000 : 3000000 };
+    });
+
+    // filtros
+    const desarrolladores = empleadosConSueldo.filter(emp =>
+      emp.cargo.toLowerCase().includes("desarrollador")
+    );
+
+    const mujeresConHijos = empleadosConSueldo.filter(emp =>
+      emp.genero === "Femenino" && emp.tieneHijos
+    );
+
+    const hombresSinHijos = empleadosConSueldo.filter(emp =>
+      emp.genero === "Masculino" && !emp.tieneHijos
+    );
+
+    // función para crear tablas
+    function crearTabla(datos) {
+      let tabla = "<table><tr>";
+      
+      for (let key in datos[0]) {
+        tabla += `<th>${key}</th>`;
+      }
+      tabla += "</tr>";
+
+      datos.forEach(emp => {
+        tabla += "<tr>";
+        for (let key in emp) {
+          tabla += `<td>${emp[key]}</td>`;
+        }
+        tabla += "</tr>";
+      });
+
+      tabla += "</table>";
+      return tabla;
+    }
+
+    // mostrar en HTML
+    document.getElementById("tablaDesarrolladores").innerHTML = crearTabla(desarrolladores);
+    document.getElementById("tablaMujeres").innerHTML = crearTabla(mujeresConHijos);
+    document.getElementById("tablaHombres").innerHTML = crearTabla(hombresSinHijos);
+  </script>
+
+</body>
+</html>
+
+//js
+
+const empleados = [
+  { id: 1, nombre: "Lucas", apellido: "García", cargo: "Desarrollador Frontend", tieneHijos: false, sueldo: 0, edad: 28, genero: "Masculino" },
+  { id: 2, nombre: "Marta", apellido: "Rodríguez", cargo: "Diseñadora UX/UI", tieneHijos: true, sueldo: 0, edad: 35, genero: "Femenino" },
+  { id: 3, nombre: "Julián", apellido: "Sánchez", cargo: "Analista de Datos", tieneHijos: false, sueldo: 0, edad: 24, genero: "Masculino" },
+  { id: 4, nombre: "Sofía", apellido: "Martínez", cargo: "Project Manager", tieneHijos: true, sueldo: 0, edad: 42, genero: "Femenino" },
+  { id: 5, nombre: "Diego", apellido: "López", cargo: "Desarrollador Backend", tieneHijos: false, sueldo: 0, edad: 31, genero: "Masculino" },
+  { id: 6, nombre: "Lucía", apellido: "Gómez", cargo: "QA Tester", tieneHijos: true, sueldo: 0, edad: 29, genero: "Femenino" },
+  { id: 7, nombre: "Nicolás", apellido: "Pérez", cargo: "DevOps Engineer", tieneHijos: false, sueldo: 0, edad: 33, genero: "Masculino" },
+  { id: 8, nombre: "Elena", apellido: "Fernández", cargo: "Administradora de Base de Datos", tieneHijos: true, sueldo: 0, edad: 45, genero: "Femenino" },
+  { id: 9, nombre: "Tomás", apellido: "Díaz", cargo: "Desarrollador Mobile", tieneHijos: false, sueldo: 0, edad: 26, genero: "Masculino" },
+  { id: 10, nombre: "Valeria", apellido: "Álvarez", cargo: "Scrum Master", tieneHijos: true, sueldo: 0, edad: 38, genero: "Femenino" },
+  { id: 11, nombre: "Mateo", apellido: "Romero", cargo: "Desarrollador Frontend", tieneHijos: false, sueldo: 0, edad: 22, genero: "Masculino" },
+  { id: 12, nombre: "Camila", apellido: "Sosa", cargo: "Diseñadora UX/UI", tieneHijos: false, sueldo: 0, edad: 27, genero: "Femenino" },
+  { id: 13, nombre: "Joaquín", apellido: "Torres", cargo: "Analista de Datos", tieneHijos: true, sueldo: 0, edad: 40, genero: "Masculino" },
+  { id: 14, nombre: "Victoria", apellido: "Ruiz", cargo: "Project Manager", tieneHijos: false, sueldo: 0, edad: 34, genero: "Femenino" },
+  { id: 15, nombre: "Agustín", apellido: "Benítez", cargo: "Desarrollador Backend", tieneHijos: true, sueldo: 0, edad: 30, genero: "Masculino" },
+  { id: 16, nombre: "Delfina", apellido: "Acosta", cargo: "QA Tester", tieneHijos: false, sueldo: 0, edad: 25, genero: "Femenino" },
+  { id: 17, nombre: "Bruno", apellido: "Flores", cargo: "DevOps Engineer", tieneHijos: true, sueldo: 0, edad: 37, genero: "Masculino" },
+  { id: 18, nombre: "Martina", apellido: "Medina", cargo: "Soporte Técnico", tieneHijos: false, sueldo: 0, edad: 23, genero: "Femenino" },
+  { id: 19, nombre: "Facundo", apellido: "Suárez", cargo: "Desarrollador Fullstack", tieneHijos: true, sueldo: 0, edad: 32, genero: "Masculino" },
+  { id: 20, nombre: "Paula", apellido: "Herrera", cargo: "Especialista en Seguridad", tieneHijos: false, sueldo: 0, edad: 36, genero: "Femenino" }
+];
+
+// 1 y 2: desarrolladores + asignar sueldos
+const empleadosConSueldo = empleados.map(emp => {
+  const esDev = emp.cargo.toLowerCase().includes("desarrollador");
+  return {
+    ...emp,
+    sueldo: esDev ? 2000000 : 3000000
+  };
+});
+
+const desarrolladores = empleadosConSueldo.filter(emp =>
+  emp.cargo.toLowerCase().includes("desarrollador")
+);
+
+// 3: femeninos con hijos
+const mujeresConHijos = empleadosConSueldo.filter(emp =>
+  emp.genero === "Femenino" && emp.tieneHijos
+);
+
+// 4: masculinos sin hijos
+const hombresSinHijos = empleadosConSueldo.filter(emp =>
+  emp.genero === "Masculino" && !emp.tieneHijos
+);
+
+// resultados
+console.log("Desarrolladores:");
+console.table(desarrolladores);
+
+console.log("Femeninos con hijos:");
+console.table(mujeresConHijos);
+
+console.log("Masculinos sin hijos:");
+console.table(hombresSinHijos);
