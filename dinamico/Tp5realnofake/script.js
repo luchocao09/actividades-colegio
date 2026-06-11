@@ -69,7 +69,7 @@ async function procesarClientes() {
       }
     })
 
-    tBody2.innerHTML = tablaBody2.join("")
+    tablaBody2.innerHTML = tBody2.join("")
 
   }
   catch (error) {
