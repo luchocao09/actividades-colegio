@@ -53,7 +53,7 @@ async function procesarClientes() {
 
 
 
-    const tBody2 = document.getElementById("cli_sin_extra")
+    const tablaBody2 = document.getElementById("cli_sin_extra")
     const tBody2 = sincargini.map(e => {
       if (e.cargoExtra==false) {
         `
@@ -69,7 +69,7 @@ async function procesarClientes() {
       }
     })
 
-    tBody2.innerHTML = tabla2.join("")
+    tBody2.innerHTML = tablaBody2.join("")
 
   }
   catch (error) {
