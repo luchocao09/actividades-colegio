@@ -28,7 +28,7 @@ async function procesarClientes() {
 
 
     })
-    // mostrar nocargo
+    // mostrar todos
     const vipi = conblacky.map(e => {
       `<tr>
     <td>${e.id}</td>
