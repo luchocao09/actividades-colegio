@@ -24,6 +24,7 @@ async function procesarClientes() {
       }
       else
         return { ...e };
+      
 
 
 
@@ -52,24 +53,27 @@ async function procesarClientes() {
 
 
 
-
+    const sincargini= conblacky.filter(e=>
+    
+      e.cargoExtra==false
+    
+    )
     const tablaBody2 = document.getElementById("cli_sin_extra")
-    const tBody2 = sincargini.map(e => {
-      if (e.cargoExtra==false) {
-        `
-  
-  <tr>
-  <td>${e.id}</td>
-  <td>${e.nombre}</td>
-  <td>${e.membresia}</td>
-  <td>${e.cargoExtra}</td>
-  </tr>
-  
-  `
-      }
-    })
+    const filas2 = sincargini.map(e =>
 
-    tablaBody2.innerHTML = tBody2.join("")
+      `
+      
+      <tr>
+      <td>${e.id}</td>
+      <td>${e.nombre}</td>
+      <td>${e.membresia}</td>
+      <td>${e.cargoExtra}</td>
+      </tr>
+      
+      `
+    )
+
+    tablaBody2.innerHTML = filas2.join("")
 
   }
   catch (error) {
