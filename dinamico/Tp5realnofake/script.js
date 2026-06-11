@@ -29,17 +29,10 @@ async function procesarClientes() {
 
     })
     // mostrar todos
-    const vipi = conblacky.map(e => {
-      `<tr>
-    <td>${e.id}</td>
-    <td>${e.nombre}</td>
-    <td>${e.membresia}</td>
-      <td>${e.cargoExtra}</td>
 
-    </tr>`
-      const tablaBody = document.getElementById("cli_vip")
+    const tablaBody = document.getElementById("cli_vip")
 
-      const filas = conblacky.map(e => `
+    const filas = conblacky.map(e => `
     
     <tr>
     <td>${e.id}</td>
@@ -52,18 +45,18 @@ async function procesarClientes() {
     `)
 
 
-      tablaBody.innerHTML = filas.join("")
-    }
+    tablaBody.innerHTML = filas.join("")
 
-    )
+
 
 
 
 
 
     const tBody2 = document.getElementById("cli_sin_extra")
-
-    const tabla2 = conblacky.map(e => `
+    const tBody2 = sincargini.map(e => {
+      if (e.cargoExtra==false) {
+        `
   
   <tr>
   <td>${e.id}</td>
@@ -72,7 +65,9 @@ async function procesarClientes() {
   <td>${e.cargoExtra}</td>
   </tr>
   
-  `)
+  `
+      }
+    })
 
     tBody2.innerHTML = tabla2.join("")
 
