@@ -1,0 +1,12 @@
+[
+    { "id": 1, "nombre": "Cristina Arancibia", "membresia": "Gold", "cargoExtra": false },
+    { "id": 2, "nombre": "Iván González", "membresia": "Platinum", "cargoExtra": false },
+    { "id": 3, "nombre": "Martín Pérez", "membresia": "Gold", "cargoExtra": true },
+    { "id": 4, "nombre": "Lucía Fernández", "membresia": "Black", "cargoExtra": false },
+    { "id": 5, "nombre": "Sofía Rodríguez", "membresia": "Platinum", "cargoExtra": true },
+    { "id": 6, "nombre": "Juan López", "membresia": "Gold", "cargoExtra": false },
+    { "id": 7, "nombre": "Carla Méndez", "membresia": "Black", "cargoExtra": true },
+    { "id": 8, "nombre": "Diego Sánchez", "membresia": "Platinum", "cargoExtra": false },
+    { "id": 9, "nombre": "Valentina Gómez", "membresia": "Gold", "cargoExtra": true },
+    { "id": 10, "nombre": "Fernando Castro", "membresia": "Black", "cargoExtra": false }
+  ]
