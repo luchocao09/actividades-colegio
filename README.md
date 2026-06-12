@@ -1,1 +1,1 @@
-# actividades-colegio queque so
+# actividades-colegio
