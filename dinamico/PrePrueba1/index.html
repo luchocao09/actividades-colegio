@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="script.js"></script>
+    
 </head>
 <body>
     <h2>Simulador de fiestas</h2>
@@ -19,14 +19,17 @@
         <option value="1000000">Grande</option>
     </select>
     <br>
-    <label for="">Desea un evento musical?</label>
-    <input type="checkbox" name="" id="evento_musical">
-    <br>
+    <div id="div_evento" style="visibility: hidden;">
+
+        <label for="">Desea un evento musical?</label>
+        <input type="checkbox" name="" id="evento_musical">
+    </div>
     <label for="">Nombre del que reserva</label>
     <input type="text" name="" id="nombre">
-    <input type="submit" value="Calcular">
+    <input type="submit" value="Calcular" id="Calcular">
 
     <div id="resultados"></div>
 
 </body>
+<script src="script.js"></script>
 </html>
