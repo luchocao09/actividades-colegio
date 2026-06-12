@@ -1,4 +1,4 @@
-
+<script>
 function calcularsueldo() {
 
 var nombre = document.getElementById("nombre").value;
@@ -31,7 +31,7 @@ if (errores != "") {
 }
 
 }
-
+</script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,6 +57,6 @@ if (errores != "") {
         <br>
         <input type="submit" value="Calcular" onclick="calcularsueldo()">
     </div>
-    <script src="script.js"></script>
+    
 </body>
 </html>
