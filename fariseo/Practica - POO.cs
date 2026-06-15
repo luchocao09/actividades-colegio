@@ -23,14 +23,6 @@ class Program
         alumno6.Nombre="Lucia";
         alumno6.Edad=20;
         alumno6.Dni=390001111;
-        alumno6.Apellido="Diaz";
-        alumno6.Nombre="Pedro";
-        alumno6.Edad=23;
-        alumno6.Dni=320002222;
-        alumno6.Apellido="Torres";
-        alumno6.Nombre="Sofia";
-        alumno6.Edad=19;
-        alumno6.Dni=410003333;
         alumno7.Apellido="Ruiz";
         alumno7.Nombre="Diego";
         alumno7.Edad=21;
@@ -76,7 +68,22 @@ public class Alumno
 {
     public string Apellido{get;set;}
     public string Nombre{get;set;}
-    public int Edad{get;set;}
+    public int Edad
+    {
+        get;
+        set
+        {
+         if (value < 0)
+         {
+            Console.WriteLine("La edad no puede ser negativa. Se asignará 0 por defecto.");
+            field = 0;
+         }
+         else
+         {
+            field = value;
+         }
+        }
+    }
     public long Dni{get;set;}
 
     public int Id {get;set;}
