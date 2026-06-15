@@ -4,7 +4,7 @@ class Program
 {
     static void Main()
     {
-        Alumno alumno1 = new Alumno("Perez", "Juan", -1, 12345678);
+        Alumno alumno1 = new Alumno("Perez", "Juan", 20, 12345678);
         Alumno alumno2 = new Alumno("Gomez", "Maria", 22, 87654321);
         Alumno alumno3 = new Alumno("Lopez", "Carlos", 19, 11223344);
         Alumno alumno4 = new Alumno("Rodriguez", "Ana", 21, 55667788);
@@ -76,7 +76,7 @@ public class Alumno
 {
     public string Apellido{get;set;}
     public string Nombre{get;set;}
-    public int Edad{get;set{value<0??throw new ArgumentException("Edad invalida");}}
+    public int Edad{get;set;}
     public long Dni{get;set;}
 
     public int Id {get;set;}
