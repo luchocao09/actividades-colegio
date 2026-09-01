@@ -1,0 +1,23 @@
+[
+    { "id": 1, "nombre": "Lucas", "apellido": "García", "cargo": "Desarrollador Frontend", "tieneHijos": false, "sueldo": 0, "edad": 28, "genero": "Masculino" },
+      { "id": 2, "nombre": "Marta", "apellido": "Rodríguez", "cargo": "Diseñadora UX/UI", "tieneHijos": true, "sueldo": 0, "edad": 35, "genero": "Femenino" },
+      { "id": 3, "nombre": "Julián", "apellido": "Sánchez", "cargo": "Analista de Datos", "tieneHijos": false, "sueldo": 0, "edad": 24, "genero": "Masculino" },
+      { "id": 4, "nombre": "Sofía", "apellido": "Martínez", "cargo": "Project Manager", "tieneHijos": true, "sueldo": 0, "edad": 42, "genero": "Femenino" },
+      { "id": 5, "nombre": "Diego", "apellido": "López", "cargo": "Desarrollador Backend", "tieneHijos": false, "sueldo": 0, "edad": 31, "genero": "Masculino" },
+      { "id": 6, "nombre": "Lucía", "apellido": "Gómez", "cargo": "QA Tester", "tieneHijos": true, "sueldo": 0, "edad": 29, "genero": "Femenino" },
+      { "id": 7, "nombre": "Nicolás", "apellido": "Pérez", "cargo": "DevOps Engineer", "tieneHijos": false, "sueldo": 0, "edad": 33, "genero": "Masculino" },
+      { "id": 8, "nombre": "Elena", "apellido": "Fernández", "cargo": "Administradora de Base de Datos", "tieneHijos": true, "sueldo": 0, "edad": 45, "genero": "Femenino" },
+      { "id": 9, "nombre": "Tomás", "apellido": "Díaz", "cargo": "Desarrollador Mobile", "tieneHijos": false, "sueldo": 0, "edad": 26, "genero": "Masculino" },
+      { "id": 10, "nombre": "Valeria", "apellido": "Álvarez", "cargo": "Scrum Master", "tieneHijos": true, "sueldo": 0, "edad": 38, "genero": "Femenino" },
+      { "id": 11, "nombre": "Mateo", "apellido": "Romero", "cargo": "Desarrollador Frontend", "tieneHijos": false, "sueldo": 0, "edad": 22, "genero": "Masculino" },
+      { "id": 12, "nombre": "Camila", "apellido": "Sosa", "cargo": "Diseñadora UX/UI", "tieneHijos": false, "sueldo": 0, "edad": 27, "genero": "Femenino" },
+      { "id": 13, "nombre": "Joaquín", "apellido": "Torres", "cargo": "Analista de Datos", "tieneHijos": true, "sueldo": 0, "edad": 40, "genero": "Masculino" },
+      { "id": 14, "nombre": "Victoria", "apellido": "Ruiz", "cargo": "Project Manager", "tieneHijos": false, "sueldo": 0, "edad": 34, "genero": "Femenino" },
+      { "id": 15, "nombre": "Agustín", "apellido": "Benítez", "cargo": "Desarrollador Backend", "tieneHijos": true, "sueldo": 0, "edad": 30, "genero": "Masculino" },
+      { "id": 16, "nombre": "Delfina", "apellido": "Acosta", "cargo": "QA Tester", "tieneHijos": false, "sueldo": 0, "edad": 25, "genero": "Femenino" },
+      { "id": 17, "nombre": "Bruno", "apellido": "Flores", "cargo": "DevOps Engineer", "tieneHijos": true, "sueldo": 0, "edad": 37, "genero": "Masculino" },
+      { "id": 18, "nombre": "Martina", "apellido": "Medina", "cargo": "Soporte Técnico", "tieneHijos": false, "sueldo": 0, "edad": 23, "genero": "Femenino" },
+      { "id": 19, "nombre": "Facundo", "apellido": "Suárez", "cargo": "Desarrollador Fullstack", "tieneHijos": true, "sueldo": 0, "edad": 32, "genero": "Masculino" },
+      { "id": 20, "nombre": "Paula", "apellido": "Herrera", "cargo": "Especialista en Seguridad", "tieneHijos": false, "sueldo": 0, "edad": 36, "genero": "Femenino" }
+
+]
