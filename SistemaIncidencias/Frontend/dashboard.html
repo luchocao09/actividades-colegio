@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Municipio Incidencias - Panel Principal</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Navbar estilo Instagram -->
+    <aside class="sidebar">
+      <div class="brand-logo">🏙️ Municipio</div>
+      
+      <ul class="nav-links">
+        <li>
+          <a class="nav-item active" id="nav-home">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span>Inicio</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" id="nav-new-incident">
+            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            <span>Nuevo Reporte</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" id="nav-logout">
+            <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+            <span>Cerrar Sesión</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Info del Usuario logueado -->
+      <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border-color); display: flex; align-items: center; gap: 10px;">
+        <div class="user-avatar" id="current-user-avatar">U</div>
+        <div class="user-info" style="overflow: hidden;">
+          <span class="user-name" id="current-user-name" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">Usuario</span>
+          <span class="post-location" id="current-user-role">Ciudadano</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Content Feed Area -->
+    <main class="main-feed">
+      <!-- Filtros de Categoría (Estilo Instagram Stories) -->
+      <div class="categories-bar">
+        <div class="category-item active" data-categoria="">
+          <div class="category-avatar-ring">
+            <div class="category-avatar">🌐</div>
+          </div>
+          <span class="category-label">Todas</span>
+        </div>
+        <div class="category-item" data-categoria="Alumbrado">
+          <div class="category-avatar-ring">
+            <div class="category-avatar">💡</div>
+          </div>
+          <span class="category-label">Alumbrado</span>
+        </div>
+        <div class="category-item" data-categoria="Baches">
+          <div class="category-avatar-ring">
+            <div class="category-avatar">🛣️</div>
+          </div>
+          <span class="category-label">Baches</span>
+        </div>
+        <div class="category-item" data-categoria="Limpieza">
+          <div class="category-avatar-ring">
+            <div class="category-avatar">🧹</div>
+          </div>
+          <span class="category-label">Limpieza</span>
+        </div>
+        <div class="category-item" data-categoria="Espacios Verdes">
+          <div class="category-avatar-ring">
+            <div class="category-avatar">🌳</div>
+          </div>
+          <span class="category-label">Plazas</span>
+        </div>
+        <div class="category-item" data-categoria="Seguridad">
+          <div class="category-avatar-ring">
+            <div class="category-avatar">🛡️</div>
+          </div>
+          <span class="category-label">Seguridad</span>
+        </div>
+      </div>
+
+      <!-- Barra de Búsqueda y Filtro de Estado -->
+      <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <input type="text" id="search-input" class="form-input" placeholder="🔍 Buscar por calle, título o descripción...">
+        <select id="status-filter" class="form-select" style="width: 160px;">
+          <option value="">Todos los Estados</option>
+          <option value="Pendiente">Pendiente</option>
+          <option value="EnProceso">En Proceso</option>
+          <option value="Resuelto">Resuelto</option>
+          <option value="Rechazado">Rechazado</option>
+        </select>
+      </div>
+
+      <!-- Feed Container (Publicaciones) -->
+      <div id="incidents-feed">
+        <div style="text-align: center; padding: 40px; color: var(--text-muted);">
+          Cargando incidencias del municipio...
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal para Crear Incidencia -->
+  <div class="modal-backdrop" id="modal-create-incident">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">📌 Reportar Incidencia</h3>
+        <button class="btn-close" id="btn-close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="create-incident-form">
+          <div class="form-group">
+            <label class="form-label">Título del Reporte</label>
+            <input type="text" id="inc-titulo" class="form-input" placeholder="ej. Bache grande en la calle" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Categoría</label>
+            <select id="inc-categoria" class="form-select" required>
+              <option value="Alumbrado">💡 Alumbrado Público</option>
+              <option value="Baches">🛣️ Baches y Pavimento</option>
+              <option value="Limpieza">🧹 Basura y Limpieza</option>
+              <option value="Espacios Verdes">🌳 Plazas y Parques</option>
+              <option value="Seguridad">🛡️ Seguridad / Semáforos</option>
+              <option value="General">📦 General</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex: 2;">
+              <label class="form-label">Calle / Avenida</label>
+              <input type="text" id="inc-calle" class="form-input" placeholder="ej. Av. Rivadavia" required>
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label class="form-label">Altura</label>
+              <input type="text" id="inc-altura" class="form-input" placeholder="ej. 14200" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex: 1;">
+              <label class="form-label">Entre calles (Opcional)</label>
+              <input type="text" id="inc-entrecalles" class="form-input" placeholder="ej. Belgrano y San Martín">
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label class="form-label">Localidad / Barrio</label>
+              <input type="text" id="inc-localidad" class="form-input" value="Morón">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Descripción</label>
+            <textarea id="inc-descripcion" class="form-textarea" rows="3" placeholder="Describe el problema en detalle..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">URL de Foto (Opcional)</label>
+            <input type="url" id="inc-imagen" class="form-input" placeholder="https://ejemplo.com/foto.jpg">
+          </div>
+
+          <button type="submit" class="btn-primary">Publicar Reporte</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Cambiar Estado (Solo Admins o Gestion) -->
+  <div class="modal-backdrop" id="modal-change-status">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">⚙️ Cambiar Estado</h3>
+        <button class="btn-close" id="btn-close-status-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="change-status-form">
+          <input type="hidden" id="status-incidencia-id">
+          <div class="form-group">
+            <label class="form-label">Nuevo Estado</label>
+            <select id="select-nuevo-estado" class="form-select">
+              <option value="Pendiente">🟡 Pendiente</option>
+              <option value="EnProceso">🔵 En Proceso</option>
+              <option value="Resuelto">🟢 Resuelto</option>
+              <option value="Rechazado">🔴 Rechazado</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary">Guardar Estado</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
