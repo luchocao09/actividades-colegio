@@ -12,7 +12,7 @@ if (!string.IsNullOrEmpty(connectionString))
 {
     builder.Services.AddDbContext<AppDbContext>(options =>
     {
-        options.UseMySql(connectionString, ServerVersion.Parse("10.4.32-MariaDB"), mySqlOptions =>
+        options.Use(connectionString, ServerVersion.Parse("10.4.32-MariaDB"), Options =>
         {
             mySqlOptions.EnableRetryOnFailure(
                 maxRetryCount: 5,

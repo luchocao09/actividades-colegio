@@ -9,29 +9,31 @@
 <body>
   <div class="app-container">
     <!-- Navbar estilo Instagram -->
-    <aside class="sidebar">
+    <aside class="sidebar" aria-label="Navegación principal">
       <div class="brand-logo">🏙️ Municipio</div>
       
-      <ul class="nav-links">
-        <li>
-          <a class="nav-item active" id="nav-home">
-            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-            <span>Inicio</span>
-          </a>
-        </li>
-        <li>
-          <a class="nav-item" id="nav-new-incident">
-            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-            <span>Nuevo Reporte</span>
-          </a>
-        </li>
-        <li>
-          <a class="nav-item" id="nav-logout">
-            <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
-            <span>Cerrar Sesión</span>
-          </a>
-        </li>
-      </ul>
+      <nav>
+        <ul class="nav-links">
+          <li>
+            <a href="#" class="nav-item active" id="nav-home">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+              <span>Inicio</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-item" id="nav-new-incident">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+              <span>Nuevo Reporte</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-item" id="nav-logout">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+              <span>Cerrar Sesión</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
 
       <!-- Info del Usuario logueado -->
       <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border-color); display: flex; align-items: center; gap: 10px;">
@@ -46,48 +48,51 @@
     <!-- Content Feed Area -->
     <main class="main-feed">
       <!-- Filtros de Categoría (Estilo Instagram Stories) -->
-      <div class="categories-bar">
-        <div class="category-item active" data-categoria="">
+      <section aria-label="Filtros de categorías" class="categories-bar">
+        <button class="category-item active" data-categoria="" type="button">
           <div class="category-avatar-ring">
             <div class="category-avatar">🌐</div>
           </div>
           <span class="category-label">Todas</span>
-        </div>
-        <div class="category-item" data-categoria="Alumbrado">
+        </button>
+        <button class="category-item" data-categoria="Alumbrado" type="button">
           <div class="category-avatar-ring">
             <div class="category-avatar">💡</div>
           </div>
           <span class="category-label">Alumbrado</span>
-        </div>
-        <div class="category-item" data-categoria="Baches">
+        </button>
+        <button class="category-item" data-categoria="Baches" type="button">
           <div class="category-avatar-ring">
             <div class="category-avatar">🛣️</div>
           </div>
           <span class="category-label">Baches</span>
-        </div>
-        <div class="category-item" data-categoria="Limpieza">
+        </button>
+        <button class="category-item" data-categoria="Limpieza" type="button">
           <div class="category-avatar-ring">
             <div class="category-avatar">🧹</div>
           </div>
           <span class="category-label">Limpieza</span>
-        </div>
-        <div class="category-item" data-categoria="Espacios Verdes">
+        </button>
+        <button class="category-item" data-categoria="Espacios Verdes" type="button">
           <div class="category-avatar-ring">
             <div class="category-avatar">🌳</div>
           </div>
           <span class="category-label">Plazas</span>
-        </div>
-        <div class="category-item" data-categoria="Seguridad">
+        </button>
+        <button class="category-item" data-categoria="Seguridad" type="button">
           <div class="category-avatar-ring">
             <div class="category-avatar">🛡️</div>
           </div>
           <span class="category-label">Seguridad</span>
-        </div>
-      </div>
+        </button>
+      </section>
 
       <!-- Barra de Búsqueda y Filtro de Estado -->
-      <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+      <section aria-label="Filtros y Búsqueda" style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <label for="search-input" class="sr-only">Buscar incidencias</label>
         <input type="text" id="search-input" class="form-input" placeholder="🔍 Buscar por calle, título o descripción...">
+        
+        <label for="status-filter" class="sr-only">Filtrar por estado</label>
         <select id="status-filter" class="form-select" style="width: 160px;">
           <option value="">Todos los Estados</option>
           <option value="Pendiente">Pendiente</option>
@@ -95,33 +100,33 @@
           <option value="Resuelto">Resuelto</option>
           <option value="Rechazado">Rechazado</option>
         </select>
-      </div>
+      </section>
 
       <!-- Feed Container (Publicaciones) -->
-      <div id="incidents-feed">
+      <section id="incidents-feed" aria-live="polite">
         <div style="text-align: center; padding: 40px; color: var(--text-muted);">
           Cargando incidencias del municipio...
         </div>
-      </div>
+      </section>
     </main>
   </div>
 
   <!-- Modal para Crear Incidencia -->
-  <div class="modal-backdrop" id="modal-create-incident">
+  <div class="modal-backdrop" id="modal-create-incident" aria-hidden="true" role="dialog" aria-labelledby="modal-create-title">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 class="modal-title">📌 Reportar Incidencia</h3>
-        <button class="btn-close" id="btn-close-modal">&times;</button>
+        <h3 class="modal-title" id="modal-create-title">📌 Reportar Incidencia</h3>
+        <button class="btn-close" id="btn-close-modal" aria-label="Cerrar modal">&times;</button>
       </div>
       <div class="modal-body">
         <form id="create-incident-form">
           <div class="form-group">
-            <label class="form-label">Título del Reporte</label>
+            <label class="form-label" for="inc-titulo">Título del Reporte</label>
             <input type="text" id="inc-titulo" class="form-input" placeholder="ej. Bache grande en la calle" required>
           </div>
 
           <div class="form-group">
-            <label class="form-label">Categoría</label>
+            <label class="form-label" for="inc-categoria">Categoría</label>
             <select id="inc-categoria" class="form-select" required>
               <option value="Alumbrado">💡 Alumbrado Público</option>
               <option value="Baches">🛣️ Baches y Pavimento</option>
@@ -134,33 +139,33 @@
 
           <div class="form-row">
             <div class="form-group" style="flex: 2;">
-              <label class="form-label">Calle / Avenida</label>
+              <label class="form-label" for="inc-calle">Calle / Avenida</label>
               <input type="text" id="inc-calle" class="form-input" placeholder="ej. Av. Rivadavia" required>
             </div>
             <div class="form-group" style="flex: 1;">
-              <label class="form-label">Altura</label>
+              <label class="form-label" for="inc-altura">Altura</label>
               <input type="text" id="inc-altura" class="form-input" placeholder="ej. 14200" required>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group" style="flex: 1;">
-              <label class="form-label">Entre calles (Opcional)</label>
+              <label class="form-label" for="inc-entrecalles">Entre calles (Opcional)</label>
               <input type="text" id="inc-entrecalles" class="form-input" placeholder="ej. Belgrano y San Martín">
             </div>
             <div class="form-group" style="flex: 1;">
-              <label class="form-label">Localidad / Barrio</label>
+              <label class="form-label" for="inc-localidad">Localidad / Barrio</label>
               <input type="text" id="inc-localidad" class="form-input" value="Morón">
             </div>
           </div>
 
           <div class="form-group">
-            <label class="form-label">Descripción</label>
+            <label class="form-label" for="inc-descripcion">Descripción</label>
             <textarea id="inc-descripcion" class="form-textarea" rows="3" placeholder="Describe el problema en detalle..." required></textarea>
           </div>
 
           <div class="form-group">
-            <label class="form-label">URL de Foto (Opcional)</label>
+            <label class="form-label" for="inc-imagen">URL de Foto (Opcional)</label>
             <input type="url" id="inc-imagen" class="form-input" placeholder="https://ejemplo.com/foto.jpg">
           </div>
 
@@ -171,17 +176,17 @@
   </div>
 
   <!-- Modal Cambiar Estado (Solo Admins o Gestion) -->
-  <div class="modal-backdrop" id="modal-change-status">
+  <div class="modal-backdrop" id="modal-change-status" aria-hidden="true" role="dialog" aria-labelledby="modal-status-title">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 class="modal-title">⚙️ Cambiar Estado</h3>
-        <button class="btn-close" id="btn-close-status-modal">&times;</button>
+        <h3 class="modal-title" id="modal-status-title">⚙️ Cambiar Estado</h3>
+        <button class="btn-close" id="btn-close-status-modal" aria-label="Cerrar modal">&times;</button>
       </div>
       <div class="modal-body">
         <form id="change-status-form">
           <input type="hidden" id="status-incidencia-id">
           <div class="form-group">
-            <label class="form-label">Nuevo Estado</label>
+            <label class="form-label" for="select-nuevo-estado">Nuevo Estado</label>
             <select id="select-nuevo-estado" class="form-select">
               <option value="Pendiente">🟡 Pendiente</option>
               <option value="EnProceso">🔵 En Proceso</option>
@@ -195,6 +200,7 @@
     </div>
   </div>
 
+  <script src="js/config.js"></script>
   <script src="js/api.js"></script>
   <script src="js/dashboard.js"></script>
 </body>
