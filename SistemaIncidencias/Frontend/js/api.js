@@ -1,24 +1,29 @@
-// API Helper module for connecting Frontend to C# Backend
-const API_BASE_URL = 'http://localhost:5281/api';
+// Servicio centralizado para interactuar con la API del Backend (C#)
 
 const API = {
-  getToken: () => localStorage.getItem('token'),
+  // Manejo de Sesión / LocalStorage
+  getToken: () => localStorage.getItem(CONFIG.STORAGE_KEYS.TOKEN),
   
   getUser: () => {
-    const userStr = localStorage.getItem('user');
-    return userStr ? JSON.parse(userStr) : null;
+    const userStr = localStorage.getItem(CONFIG.STORAGE_KEYS.USER);
+    try {
+      return userStr ? JSON.parse(userStr) : null;
+    } catch {
+      return null;
+    }
   },
 
   setAuthSession: (token, user) => {
-    localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem(CONFIG.STORAGE_KEYS.TOKEN, token);
+    localStorage.setItem(CONFIG.STORAGE_KEYS.USER, JSON.stringify(user));
   },
 
   clearAuthSession: () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem(CONFIG.STORAGE_KEYS.TOKEN);
+    localStorage.removeItem(CONFIG.STORAGE_KEYS.USER);
   },
 
+  // Generador de Headers HTTP
   headers: (includeAuth = true) => {
     const headers = {
       'Content-Type': 'application/json'
@@ -32,9 +37,9 @@ const API = {
     return headers;
   },
 
-  // HTTP Helpers
+  // Métodos HTTP genéricos
   get: async (endpoint) => {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    const response = await fetch(`${CONFIG.API_BASE_URL}${endpoint}`, {
       method: 'GET',
       headers: API.headers()
     });
@@ -42,7 +47,7 @@ const API = {
   },
 
   post: async (endpoint, body, includeAuth = true) => {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    const response = await fetch(`${CONFIG.API_BASE_URL}${endpoint}`, {
       method: 'POST',
       headers: API.headers(includeAuth),
       body: JSON.stringify(body)
@@ -51,7 +56,7 @@ const API = {
   },
 
   patch: async (endpoint, body) => {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    const response = await fetch(`${CONFIG.API_BASE_URL}${endpoint}`, {
       method: 'PATCH',
       headers: API.headers(),
       body: JSON.stringify(body)
@@ -60,7 +65,7 @@ const API = {
   },
 
   put: async (endpoint, body) => {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    const response = await fetch(`${CONFIG.API_BASE_URL}${endpoint}`, {
       method: 'PUT',
       headers: API.headers(),
       body: JSON.stringify(body)
@@ -69,17 +74,23 @@ const API = {
   },
 
   delete: async (endpoint) => {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    const response = await fetch(`${CONFIG.API_BASE_URL}${endpoint}`, {
       method: 'DELETE',
       headers: API.headers()
     });
     return API.handleResponse(response);
   },
 
+  // Procesador unificado de respuestas HTTP
   handleResponse: async (response) => {
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {
-      const errorMsg = data.mensaje || data.title || 'Ocurrió un error en la solicitud.';
+      // Si el token venció o es inválido, cerramos sesión automáticamente
+      if (response.status === 401 && API.getToken()) {
+        API.clearAuthSession();
+        window.location.href = 'index.html';
+      }
+      const errorMsg = data.mensaje || data.title || (data.errors ? Object.values(data.errors).flat().join(', ') : 'Ocurrió un error en la solicitud.');
       throw new Error(errorMsg);
     }
     return data;

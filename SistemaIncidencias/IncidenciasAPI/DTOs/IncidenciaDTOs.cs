@@ -2,73 +2,61 @@ using System.ComponentModel.DataAnnotations;
 
 namespace IncidenciasAPI.DTOs
 {
-    public class CrearIncidenciaDto
+    /// <summary>DTO para crear un nuevo incidente.</summary>
+    public class CrearIncidenteDto
     {
-        [Required(ErrorMessage = "El título es obligatorio")]
-        [MaxLength(150)]
-        public string Titulo { get; set; } = string.Empty;
-
         [Required(ErrorMessage = "La descripción es obligatoria")]
         public string Descripcion { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "La categoría es obligatoria")]
-        public string Categoria { get; set; } = "General";
+        [MaxLength(200)]
+        public string? Ubicacion { get; set; }
 
-        [Required(ErrorMessage = "La calle es obligatoria")]
-        [MaxLength(150)]
-        public string Calle { get; set; } = string.Empty;
-
-        [MaxLength(20)]
-        public string Altura { get; set; } = string.Empty; // Número o S/N
-
-        [MaxLength(150)]
-        public string? EntreCalles { get; set; }
-
-        [MaxLength(100)]
-        public string? Localidad { get; set; } = "Morón";
-
-        public string? ImagenUrl { get; set; }
+        /// <summary>ID del ciudadano que reporta (opcional).</summary>
+        public int? IdCiudadano { get; set; }
     }
 
-    public class ActualizarIncidenciaDto
+    /// <summary>DTO para actualizar campos de un incidente.</summary>
+    public class ActualizarIncidenteDto
     {
-        public string? Titulo { get; set; }
         public string? Descripcion { get; set; }
-        public string? Categoria { get; set; }
-        public string? Calle { get; set; }
-        public string? Altura { get; set; }
-        public string? EntreCalles { get; set; }
-        public string? Localidad { get; set; }
-        public string? ImagenUrl { get; set; }
+        public string? Ubicacion  { get; set; }
+        public string? Estado     { get; set; } // Pendiente | EnProceso | Resuelto
     }
 
+    /// <summary>DTO para cambiar solo el estado de un incidente.</summary>
     public class ActualizarEstadoDto
     {
         [Required(ErrorMessage = "El nuevo estado es obligatorio")]
-        public string Estado { get; set; } = string.Empty; // "Pendiente", "En Proceso", "Resuelto", "Rechazado"
+        public string Estado { get; set; } = string.Empty;
     }
 
+    /// <summary>Resumen de usuario en respuestas de incidente.</summary>
     public class UsuarioResumenDto
     {
-        public int Id { get; set; }
+        public int    IdUsuario      { get; set; }
         public string NombreCompleto { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
+        public string Email          { get; set; } = string.Empty;
     }
 
-    public class IncidenciaDetalleDto
+    /// <summary>Resumen de ciudadano en respuestas de incidente.</summary>
+    public class CiudadanoResumenDto
     {
-        public int Id { get; set; }
-        public string Titulo { get; set; } = string.Empty;
-        public string Descripcion { get; set; } = string.Empty;
-        public string Categoria { get; set; } = string.Empty;
-        public string Calle { get; set; } = string.Empty;
-        public string Altura { get; set; } = string.Empty;
-        public string? EntreCalles { get; set; }
-        public string? Localidad { get; set; }
-        public string Estado { get; set; } = string.Empty;
-        public string? ImagenUrl { get; set; }
-        public DateTime FechaReporte { get; set; }
-        public DateTime? FechaActualizacion { get; set; }
-        public UsuarioResumenDto? Usuario { get; set; }
+        public int     IdCiudadano { get; set; }
+        public string  Nombre      { get; set; } = string.Empty;
+        public string? Apellido    { get; set; }
+        public string  Dni         { get; set; } = string.Empty;
+    }
+
+    /// <summary>DTO completo de un incidente para respuestas de la API.</summary>
+    public class IncidenteDetalleDto
+    {
+        public int      IdIncidente      { get; set; }
+        public string   Descripcion      { get; set; } = string.Empty;
+        public string?  Ubicacion        { get; set; }
+        public string   Estado           { get; set; } = string.Empty;
+        public DateTime FechaInicio      { get; set; }
+        public DateTime? FechaFinalizacion { get; set; }
+        public UsuarioResumenDto?   Usuario   { get; set; }
+        public CiudadanoResumenDto? Ciudadano { get; set; }
     }
 }

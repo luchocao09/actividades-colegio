@@ -7,21 +7,23 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="auth-page">
-    <div class="auth-card">
-      <div class="auth-logo">🏙️ Municipio</div>
+  <main class="auth-page">
+    <section class="auth-card" aria-labelledby="auth-title">
+      <h1 id="auth-title" class="auth-logo">🏙️ Municipio</h1>
       <p class="auth-subtitle">Reportes Ciudadanos de Incidencias Urbanas</p>
 
       <!-- Mensaje de Alerta / Error -->
-      <div id="alert-box" style="display: none; padding: 10px; margin-bottom: 16px; border-radius: 6px; font-size: 0.85rem; text-align: center;"></div>
+      <div id="alert-box" role="alert" aria-live="polite" style="display: none; padding: 10px; margin-bottom: 16px; border-radius: 6px; font-size: 0.85rem; text-align: center;"></div>
 
       <!-- Formulario de Login -->
       <form id="login-form">
         <div class="form-group">
-          <input type="email" id="login-email" class="form-input" placeholder="Correo Electrónico" required>
+          <label for="login-email" class="sr-only">Correo Electrónico</label>
+          <input type="email" id="login-email" class="form-input" placeholder="Correo Electrónico" required autocomplete="email">
         </div>
         <div class="form-group">
-          <input type="password" id="login-password" class="form-input" placeholder="Contraseña" required>
+          <label for="login-password" class="sr-only">Contraseña</label>
+          <input type="password" id="login-password" class="form-input" placeholder="Contraseña" required autocomplete="current-password">
         </div>
         <button type="submit" class="btn-primary">Iniciar Sesión</button>
       </form>
@@ -29,15 +31,19 @@
       <!-- Formulario de Registro (Oculto por defecto) -->
       <form id="register-form" style="display: none;">
         <div class="form-group">
-          <input type="text" id="reg-name" class="form-input" placeholder="Nombre Completo" required>
+          <label for="reg-name" class="sr-only">Nombre Completo</label>
+          <input type="text" id="reg-name" class="form-input" placeholder="Nombre Completo" required autocomplete="name">
         </div>
         <div class="form-group">
-          <input type="email" id="reg-email" class="form-input" placeholder="Correo Electrónico" required>
+          <label for="reg-email" class="sr-only">Correo Electrónico</label>
+          <input type="email" id="reg-email" class="form-input" placeholder="Correo Electrónico" required autocomplete="email">
         </div>
         <div class="form-group">
-          <input type="password" id="reg-password" class="form-input" placeholder="Contraseña (mínimo 6 caracteres)" required>
+          <label for="reg-password" class="sr-only">Contraseña</label>
+          <input type="password" id="reg-password" class="form-input" placeholder="Contraseña (mínimo 6 caracteres)" required autocomplete="new-password">
         </div>
         <div class="form-group">
+          <label for="reg-role" class="sr-only">Rol de Usuario</label>
           <select id="reg-role" class="form-select">
             <option value="Ciudadano">Ciudadano</option>
             <option value="Administrador">Administrador Municipal</option>
@@ -47,11 +53,12 @@
       </form>
 
       <div class="auth-switch">
-        <span id="switch-text">¿No tienes una cuenta? <a id="toggle-auth">Regístrate</a></span>
+        <span id="switch-text">¿No tienes una cuenta? <a href="#" id="toggle-auth">Regístrate</a></span>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
+  <script src="js/config.js"></script>
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>
 </body>

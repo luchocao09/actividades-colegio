@@ -1,142 +1,70 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace IncidenciasAPI.Models
 {
     /// <summary>
-    /// Representa una incidencia reportada por un ciudadano.
+    /// Representa un incidente cargado en el sistema.
+    /// Tabla: incidente
     /// </summary>
-    public class Incidencia
+    [Table("incidente")]
+    public class Incidente
     {
-        #region Identificador
-        /// <summary>
-        /// Identificador único de la incidencia.
-        /// </summary>
         [Key]
-        public int Id { get; set; }
-        #endregion
+        [Column("id_incidente")]
+        public int IdIncidente { get; set; }
 
-        #region Información básica
-        /// <summary>
-        /// Título breve de la incidencia.
-        /// </summary>
-        [Required]
-        [MaxLength(150)]
-        public string Titulo { get; set; } = string.Empty;
+        [Column("fecha_inicio")]
+        public DateTime FechaInicio { get; set; } = DateTime.UtcNow;
 
-        /// <summary>
-        /// Descripción detallada de la incidencia.
-        /// </summary>
+        [Column("fecha_finalizacion")]
+        public DateTime? FechaFinalizacion { get; set; }
+
         [Required]
+        [MaxLength(500)]
+        [Column("descripcion")]
         public string Descripcion { get; set; } = string.Empty;
 
-        /// <summary>
-        /// Categoría a la que pertenece la incidencia (ej.: "Alumbrado", "Baches").
-        /// </summary>
+        [MaxLength(200)]
+        [Column("ubicacion")]
+        public string? Ubicacion { get; set; }
+
         [Required]
-        [MaxLength(60)]
-        public string Categoria { get; set; } = "General";
-        #endregion
-
-        #region Dirección
-        /// <summary>
-        /// Dirección estructurada de la incidencia.
-        /// </summary>
-        [Required]
-        public Address Direccion { get; set; } = new();
-        #endregion
-
-        #region Estado y metadatos
-        /// <summary>
-        /// Estado actual de la incidencia.
-        /// </summary>
-        [Required]
-        public EstadoIncidencia Estado { get; set; } = EstadoIncidencia.Pendiente;
+        [MaxLength(50)]
+        [Column("estado")]
+        public string Estado { get; set; } = "Pendiente"; // Pendiente | EnProceso | Resuelto
 
         /// <summary>
-        /// URL opcional de una foto que ilustre la incidencia.
+        /// Indica si la incidencia fue eliminada de forma lógica (soft delete).
         /// </summary>
-        [MaxLength(500)]
-        public string? ImagenUrl { get; set; }
-
-        /// <summary>
-        /// Fecha y hora en que se creó la incidencia (UTC).
-        /// </summary>
-        public DateTime FechaReporte { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
-        /// Fecha y hora de la última actualización (UTC), si la hubiera.
-        /// </summary>
-        public DateTime? FechaActualizacion { get; set; }
-
-        /// <summary>
-        /// Indica si la incidencia fue eliminada lógicamente.
-        /// </summary>
+        [Column("is_deleted")]
         public bool IsDeleted { get; set; } = false;
 
-        /// <summary>
-        /// Fecha y hora en que se realizó el borrado lógico.
-        /// </summary>
-        public DateTime? FechaEliminacion { get; set; }
-        #endregion
+        // ---- Claves foráneas ----
 
-        #region Relaciones
-        /// <summary>
-        /// Identificador del usuario que reportó la incidencia.
-        /// </summary>
-        [Required]
-        public int UsuarioId { get; set; }
+        /// <summary>FK hacia ciudadano (quien reportó el incidente).</summary>
+        [Column("id_ciudadano")]
+        public int? IdCiudadano { get; set; }
 
-        /// <summary>
-        /// Navegación al usuario propietario.
-        /// </summary>
-        [ForeignKey("UsuarioId")]
+        /// <summary>FK hacia el usuario del sistema responsable.</summary>
+        [Column("id_usuario")]
+        public int? IdUsuario { get; set; }
+
+        // ---- Navegación ----
+
+        [ForeignKey("IdCiudadano")]
+        [JsonIgnore]
+        public Ciudadano? Ciudadano { get; set; }
+
+        [ForeignKey("IdUsuario")]
+        [JsonIgnore]
         public Usuario? Usuario { get; set; }
-        #endregion
-    }
 
-    /// <summary>
-    /// Representa la dirección de una incidencia. Se modela como entidad "owned" de EF Core.
-    /// </summary>
-    [Owned]
-    public class Address
-    {
-        /// <summary>
-        /// Nombre de la calle o avenida.
-        /// </summary>
-        [Required]
-        [MaxLength(150)]
-        public string Calle { get; set; } = string.Empty;
+        [JsonIgnore]
+        public ICollection<Reporte> Reportes { get; set; } = new List<Reporte>();
 
-        /// <summary>
-        /// Número de altura (puede ser "S/N").
-        /// </summary>
-        [MaxLength(20)]
-        public string Altura { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Calles de referencia entre las cuales se ubica la incidencia.
-        /// </summary>
-        [MaxLength(150)]
-        public string? EntreCalles { get; set; }
-
-        /// <summary>
-        /// Localidad o barrio dentro de la provincia de Buenos Aires.
-        /// </summary>
-        [MaxLength(100)]
-        public string? Localidad { get; set; } = "Morón";
-    }
-
-    /// <summary>
-    /// Estados posibles de una incidencia.
-    /// </summary>
-    public enum EstadoIncidencia
-    {
-        Pendiente,
-        EnProceso,
-        Resuelto,
-        Rechazado
+        [JsonIgnore]
+        public ICollection<AlertaIncidente> Alertas { get; set; } = new List<AlertaIncidente>();
     }
 }
