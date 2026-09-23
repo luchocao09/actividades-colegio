@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
   // Redireccionar si ya está autenticado
   if (API.getToken()) {
     window.location.href = 'dashboard.html';
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // Toggle entre Login y Registro
-  toggleAuthBtn.addEventListener('click', (e) => {
+  const toggleAuth = (e) => {
     e.preventDefault();
     hideAlert();
     isLogin = !isLogin;
@@ -38,9 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
       registerForm.style.display = 'block';
       switchText.innerHTML = '¿Ya tienes una cuenta? <a id="toggle-auth">Inicia sesión</a>';
     }
-    // Re-bind click event because innerHTML was replaced
-    document.getElementById('toggle-auth').addEventListener('click', arguments.callee);
-  });
+    const newToggleBtn = document.getElementById('toggle-auth');
+    if (newToggleBtn) {
+      newToggleBtn.addEventListener('click', toggleAuth);
+    }
+  };
+
+  toggleAuthBtn.addEventListener('click', toggleAuth);
 
   // Login Submit
   loginForm.addEventListener('submit', async (e) => {

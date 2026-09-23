@@ -1,4 +1,4 @@
-// Servicio centralizado para interactuar con la API del Backend (C#)
+﻿// Servicio centralizado para interactuar con la API del Backend (C#)
 
 const API = {
   // Manejo de Sesión / LocalStorage
@@ -31,7 +31,7 @@ const API = {
     if (includeAuth) {
       const token = API.getToken();
       if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
+        headers['Authorization'] = 'Bearer ' + token;
       }
     }
     return headers;

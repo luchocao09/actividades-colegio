@@ -1,4 +1,4 @@
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -51,7 +51,7 @@ namespace IncidenciasAPI.Controllers
             return Ok(new AuthResponseDto
             {
                 Token = token,
-                Id = usuario.Id,
+                Id = usuario.IdUsuario,
                 NombreCompleto = usuario.NombreCompleto,
                 Email = usuario.Email,
                 Rol = usuario.Rol
@@ -76,7 +76,7 @@ namespace IncidenciasAPI.Controllers
             return Ok(new AuthResponseDto
             {
                 Token = token,
-                Id = usuario.Id,
+                Id = usuario.IdUsuario,
                 NombreCompleto = usuario.NombreCompleto,
                 Email = usuario.Email,
                 Rol = usuario.Rol
@@ -104,7 +104,7 @@ namespace IncidenciasAPI.Controllers
 
             Claim[] claims = new Claim[]
             {
-                new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, usuario.IdUsuario.ToString()),
                 new Claim(ClaimTypes.Name, usuario.NombreCompleto),
                 new Claim(ClaimTypes.Email, usuario.Email),
                 new Claim(ClaimTypes.Role, usuario.Rol)
@@ -125,3 +125,4 @@ namespace IncidenciasAPI.Controllers
         }
     }
 }
+
