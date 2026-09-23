@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Cargar Incidencias del Backend
   const loadIncidents = async () => {
-    feedContainer.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text-muted);">Cargando incidencias...</div>';
+    feedContainer.innerHTML = '<div class="loading-state">Cargando incidencias...</div>';
 
     try {
       let queryParams = [];
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       renderFeed(incidencias);
     } catch (error) {
-      feedContainer.innerHTML = `<div style="text-align: center; padding: 40px; color: var(--danger-color);">Error al cargar incidencias: ${error.message}</div>`;
+      feedContainer.innerHTML = `<div class="empty-state error-state">Error al cargar incidencias: ${error.message}</div>`;
     }
   };
 
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const renderFeed = (incidencias) => {
     if (!incidencias || incidencias.length === 0) {
       feedContainer.innerHTML = `
-        <div class="post-card" style="padding: 40px; text-align: center; color: var(--text-muted);">
+        <div class="post-card empty-state">
           📷 No hay incidencias para mostrar con los filtros seleccionados.
         </div>
       `;
@@ -103,12 +103,12 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- Botones de Acción -->
           <div class="post-actions">
             <div class="action-btns">
-              <span class="category-label" style="font-weight: 600; background: rgba(0,0,0,0.05); padding: 4px 10px; border-radius: 12px;">🏷️ ${escapeHtml(inc.categoria)}</span>
+              <span class="category-tag">🏷️ ${escapeHtml(inc.categoria)}</span>
             </div>
             ${canManage ? `
               <div class="action-btns">
                 <button class="action-btn btn-change-status" data-id="${inc.id}" data-estado="${inc.estado}" title="Cambiar Estado">⚙️</button>
-                <button class="action-btn btn-delete-inc" data-id="${inc.id}" title="Eliminar Reporte" style="color: var(--danger-color);">🗑️</button>
+                <button class="action-btn btn-delete-inc" data-id="${inc.id}" title="Eliminar Reporte">🗑️</button>
               </div>
             ` : ''}
           </div>

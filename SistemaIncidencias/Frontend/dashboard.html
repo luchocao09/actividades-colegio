@@ -36,10 +36,10 @@
       </nav>
 
       <!-- Info del Usuario logueado -->
-      <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border-color); display: flex; align-items: center; gap: 10px;">
+      <div class="sidebar-user">
         <div class="user-avatar" id="current-user-avatar">U</div>
-        <div class="user-info" style="overflow: hidden;">
-          <span class="user-name" id="current-user-name" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">Usuario</span>
+        <div class="sidebar-user-info">
+          <span class="user-name" id="current-user-name">Usuario</span>
           <span class="post-location" id="current-user-role">Ciudadano</span>
         </div>
       </div>
@@ -88,12 +88,12 @@
       </section>
 
       <!-- Barra de Búsqueda y Filtro de Estado -->
-      <section aria-label="Filtros y Búsqueda" style="display: flex; gap: 10px; margin-bottom: 20px;">
+      <section aria-label="Filtros y Búsqueda" class="filters-bar">
         <label for="search-input" class="sr-only">Buscar incidencias</label>
         <input type="text" id="search-input" class="form-input" placeholder="🔍 Buscar por calle, título o descripción...">
         
         <label for="status-filter" class="sr-only">Filtrar por estado</label>
-        <select id="status-filter" class="form-select" style="width: 160px;">
+        <select id="status-filter" class="form-select status-filter">
           <option value="">Todos los Estados</option>
           <option value="Pendiente">Pendiente</option>
           <option value="EnProceso">En Proceso</option>
@@ -104,7 +104,7 @@
 
       <!-- Feed Container (Publicaciones) -->
       <section id="incidents-feed" aria-live="polite">
-        <div style="text-align: center; padding: 40px; color: var(--text-muted);">
+        <div class="loading-state">
           Cargando incidencias del municipio...
         </div>
       </section>

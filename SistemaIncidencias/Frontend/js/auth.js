@@ -14,14 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let isLogin = true;
 
   const showAlert = (message, isError = true) => {
-    alertBox.style.display = 'block';
-    alertBox.style.backgroundColor = isError ? 'rgba(237, 73, 86, 0.15)' : 'rgba(16, 185, 129, 0.15)';
-    alertBox.style.color = isError ? '#ed4956' : '#10b981';
+    alertBox.classList.remove('is-error', 'is-success');
+    alertBox.classList.add('is-visible', isError ? 'is-error' : 'is-success');
     alertBox.innerText = message;
   };
 
   const hideAlert = () => {
-    alertBox.style.display = 'none';
+    alertBox.classList.remove('is-visible', 'is-error', 'is-success');
   };
 
   // Toggle entre Login y Registro
