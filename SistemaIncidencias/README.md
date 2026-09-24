@@ -157,3 +157,5 @@ Este proyecto está pensado para uso local de desarrollo. Para desplegarlo en pr
 - usar credenciales seguras para la base de datos,
 - guardar la clave JWT en variables de entorno,
 - configurar HTTPS y CORS de forma más restrictiva.
+
+Hecho por Fernando Franco, Gonzalo LaFuente, Gonzalo Cortaberria y Benjamin Gonzales
